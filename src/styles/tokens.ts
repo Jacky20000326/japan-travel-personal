@@ -1,0 +1,11 @@
+export const OUTLINE_COLOR = "#2D2D2D";
+export const OUTLINE_BORDER_THIN = `1px solid ${OUTLINE_COLOR}`;
+export const OUTLINE_BORDER_THICK = `2px solid ${OUTLINE_COLOR}`;
+export const CARD_RADIUS = 16;
+export const BUTTON_RADIUS = 20;
+export const TAB_MIN_HEIGHT = 48;
+export const TOUCH_TARGET = 44;
+export const CATEGORY_BAR_WIDTH = 5;
+export const CARD_MEDIA_HEIGHT = 160;
+export const CANVAS_BACKGROUND = "#FFF9E6";
+export const SURFACE_BACKGROUND = "#FFFFFF";
