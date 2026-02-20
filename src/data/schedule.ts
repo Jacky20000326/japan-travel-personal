@@ -30,7 +30,7 @@ export const SCHEDULE: DaySchedule[] = [
         name: "地獄谷野猿公苑（Snow Monkey Park）",
         category: "attraction",
         emoji: "🐒",
-        image: "/images/snow-monkey.jpg",
+        image: "/images/monkey.jpg",
         googleMapUrl:
           "https://www.google.com/maps/place/%E5%9C%B0%E7%8D%84%E8%B0%B7%E9%87%8E%E7%8C%BF%E5%85%AC%E8%8B%91/@36.6577,138.1947,15z",
         note: "世界知名的溫泉猴子保護區，可近距離觀察日本獼猴在露天溫泉中悠游。冬季皚皚白雪襯托猴群泡湯景色最為壯觀，請勿餵食或觸摸猴子。",
@@ -59,6 +59,16 @@ export const SCHEDULE: DaySchedule[] = [
     weekday: "二",
     title: "2/24（二）",
     items: [
+      {
+        type: "spot",
+        id: "day2-0",
+        time: "10:00",
+        name: "多摩動物園",
+        category: "attraction",
+        emoji: "📷",
+        image: "/images/zoo.webp",
+        note: "多摩動物園位於多摩川東岸，是日本最大的動物園，園區占地約 12 公顷，有超過 2000 多種動物，包括老虎、大象、犀牛等。",
+      },
       {
         type: "spot",
         id: "day2-1",
