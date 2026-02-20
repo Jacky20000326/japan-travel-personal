@@ -4,13 +4,13 @@
   "description": "2026年2月東京與富士山5日旅遊行程表，蠟筆小新 x Snoopy 主題。",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icon/PWD_icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icon/PWD_icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
