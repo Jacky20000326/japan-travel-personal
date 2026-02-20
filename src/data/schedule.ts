@@ -13,7 +13,7 @@ export const SCHEDULE: DaySchedule[] = [
         name: "東京站搭新幹線出發",
         emoji: "🚄",
         note: "北陸新幹線 東京→長野，07:20 出發 → 08:37 抵達長野站（車程約 77 分鐘）",
-        url: "https://japantravel.navitime.com/zh-tw/booking/jr/mypage/result/",
+        url: "https://japantravel.navitime.com/zh-tw/booking/jr/mypage/login?reserveId=SH000001719542",
       },
       {
         type: "reminder",
@@ -46,11 +46,11 @@ export const SCHEDULE: DaySchedule[] = [
       {
         type: "reminder",
         id: "day1-5",
-        time: "07:20 → 08:37",
+        time: "19:41 → 21:16",
         name: "東京站搭新幹線出發",
         emoji: "🚄",
-        note: "北陸新幹線 長野→東京，19:14 出發 → 21:16 抵達東京站（車程約 77 分鐘）",
-        url: "https://japantravel.navitime.com/zh-tw/booking/jr/mypage/result/",
+        note: "北陸新幹線 長野→東京，19:41 出發 → 21:16 抵達東京站（車程約 77 分鐘）",
+        url: "https://japantravel.navitime.com/zh-tw/booking/jr/mypage/login?reserveId=SH000001719542",
       },
     ],
   },

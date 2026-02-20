@@ -12,6 +12,10 @@ const DayTabs = () => {
 
   const handleChange = (_: SyntheticEvent, newValue: number): void => {
     setSelectedDay(newValue);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

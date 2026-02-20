@@ -40,7 +40,12 @@ import {
 } from "../../styles/tokens";
 import { EXPENSE_CATEGORIES } from "./constant";
 import type { Expense } from "../../types/expense";
-import { getExpenses, createExpense, updateExpense, deleteExpense } from "../../services/expenses.service";
+import {
+  getExpenses,
+  createExpense,
+  updateExpense,
+  deleteExpense,
+} from "../../services/expenses.service";
 
 const TRIP_DATES = [
   { value: "2026-02-21", title: "2/21（六）" },
@@ -56,7 +61,10 @@ const TRIP_DATES = [
 
 type Currency = "JPY" | "TWD" | "USD";
 
-const CURRENCY_CONFIG: Record<Currency, { label: string; symbol: string; decimals: number }> = {
+const CURRENCY_CONFIG: Record<
+  Currency,
+  { label: string; symbol: string; decimals: number }
+> = {
   JPY: { label: "日圓 JPY", symbol: "¥", decimals: 0 },
   TWD: { label: "台幣 TWD", symbol: "NT$", decimals: 0 },
   USD: { label: "美元 USD", symbol: "$", decimals: 2 },
@@ -99,7 +107,10 @@ export const ExpensesPage = () => {
 
   // 匯率 state
   const [currency, setCurrency] = useState<Currency>("JPY");
-  const [exchangeRates, setExchangeRates] = useState<{ TWD: number; USD: number } | null>(null);
+  const [exchangeRates, setExchangeRates] = useState<{
+    TWD: number;
+    USD: number;
+  } | null>(null);
   const [isLoadingRates, setIsLoadingRates] = useState(false);
 
   // 初始載入記帳記錄
@@ -144,7 +155,9 @@ export const ExpensesPage = () => {
     if (currency === "TWD" && exchangeRates) {
       converted = Math.round(jpyAmount * exchangeRates.TWD);
     } else if (currency === "USD" && exchangeRates) {
-      converted = parseFloat((jpyAmount * exchangeRates.USD).toFixed(config.decimals));
+      converted = parseFloat(
+        (jpyAmount * exchangeRates.USD).toFixed(config.decimals),
+      );
     }
     return `${config.symbol}${converted.toLocaleString(undefined, {
       minimumFractionDigits: config.decimals,
@@ -162,7 +175,9 @@ export const ExpensesPage = () => {
   })).filter((cat) => cat.total > 0);
 
   // 日期 filter 列表
-  const expenseDates = [...new Set(expenses.map((e) => e.purchase_date))].sort();
+  const expenseDates = [
+    ...new Set(expenses.map((e) => e.purchase_date)),
+  ].sort();
   const filteredExpenses = filterDate
     ? expenses.filter((e) => e.purchase_date === filterDate)
     : expenses;
@@ -196,7 +211,12 @@ export const ExpensesPage = () => {
       setItemName("");
       setCategory("");
       setPrice("");
-      setFormErrors({ selectedDate: false, itemName: false, category: false, price: false });
+      setFormErrors({
+        selectedDate: false,
+        itemName: false,
+        category: false,
+        price: false,
+      });
       setSuccessMessage("記帳新增成功！🐾");
       setSuccessSnackbar(true);
     } catch {
@@ -211,7 +231,12 @@ export const ExpensesPage = () => {
     setItemName("");
     setCategory("");
     setPrice("");
-    setFormErrors({ selectedDate: false, itemName: false, category: false, price: false });
+    setFormErrors({
+      selectedDate: false,
+      itemName: false,
+      category: false,
+      price: false,
+    });
   };
 
   const handleEditClick = (expense: Expense) => {
@@ -220,7 +245,12 @@ export const ExpensesPage = () => {
     setItemName(expense.product_name);
     setCategory(expense.category);
     setPrice(String(expense.price));
-    setFormErrors({ selectedDate: false, itemName: false, category: false, price: false });
+    setFormErrors({
+      selectedDate: false,
+      itemName: false,
+      category: false,
+      price: false,
+    });
     setFormExpanded(true);
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -265,7 +295,9 @@ export const ExpensesPage = () => {
         category,
         price: Number(price),
       });
-      setExpenses((prev) => prev.map((e) => (e.id === editingId ? updated : e)));
+      setExpenses((prev) =>
+        prev.map((e) => (e.id === editingId ? updated : e)),
+      );
       setEditingId(null);
       handleClear();
       setSuccessMessage("記帳修改成功！🐾");
@@ -338,10 +370,14 @@ export const ExpensesPage = () => {
                     ))}
                   </Select>
                 </FormControl>
-                <IconButton onClick={() => setSummaryExpanded(!summaryExpanded)}>
+                <IconButton
+                  onClick={() => setSummaryExpanded(!summaryExpanded)}
+                >
                   <ExpandMoreIcon
                     sx={{
-                      transform: summaryExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                      transform: summaryExpanded
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)",
                       transition: "transform 0.3s ease",
                     }}
                   />
@@ -410,7 +446,9 @@ export const ExpensesPage = () => {
         >
           <CardHeader
             title={editingId ? "修改記帳" : "新增記帳"}
-            avatar={<Typography variant="h5">{editingId ? "🖊️" : "✏️"}</Typography>}
+            avatar={
+              <Typography variant="h5">{editingId ? "🖊️" : "✏️"}</Typography>
+            }
             action={
               <IconButton onClick={() => setFormExpanded(!formExpanded)}>
                 <ExpandMoreIcon
@@ -443,7 +481,10 @@ export const ExpensesPage = () => {
                   onChange={(_, value) => {
                     if (value) {
                       setSelectedDate(value);
-                      setFormErrors((prev) => ({ ...prev, selectedDate: false }));
+                      setFormErrors((prev) => ({
+                        ...prev,
+                        selectedDate: false,
+                      }));
                     }
                   }}
                   sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}
@@ -453,8 +494,12 @@ export const ExpensesPage = () => {
                       key={day.value}
                       value={day.value}
                       sx={{
-                        border: formErrors.selectedDate ? "2px solid" : OUTLINE_BORDER_THICK,
-                        borderColor: formErrors.selectedDate ? "error.main" : undefined,
+                        border: formErrors.selectedDate
+                          ? "2px solid"
+                          : OUTLINE_BORDER_THICK,
+                        borderColor: formErrors.selectedDate
+                          ? "error.main"
+                          : undefined,
                         borderRadius: BUTTON_RADIUS / 2,
                         flex: "1 1 calc(33.33% - 8px)",
                         minWidth: 100,
@@ -522,7 +567,9 @@ export const ExpensesPage = () => {
                 >
                   {EXPENSE_CATEGORIES.map((cat) => (
                     <MenuItem key={cat.id} value={cat.id}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
                         <span>{cat.emoji}</span>
                         <span>{cat.label}</span>
                       </Box>
@@ -530,7 +577,11 @@ export const ExpensesPage = () => {
                   ))}
                 </Select>
                 {formErrors.category && (
-                  <Typography variant="caption" color="error" sx={{ mt: 0.5, ml: 1.75 }}>
+                  <Typography
+                    variant="caption"
+                    color="error"
+                    sx={{ mt: 0.5, ml: 1.75 }}
+                  >
                     請選擇商品類別
                   </Typography>
                 )}
@@ -550,7 +601,9 @@ export const ExpensesPage = () => {
                 error={formErrors.price}
                 helperText={formErrors.price ? "請輸入大於 0 的金額" : ""}
                 InputProps={{
-                  startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+                  startAdornment: (
+                    <InputAdornment position="start">¥</InputAdornment>
+                  ),
                 }}
                 inputProps={{ min: 0, step: 1, inputMode: "numeric" }}
                 sx={{
@@ -595,7 +648,11 @@ export const ExpensesPage = () => {
                     startIcon={<CloseIcon />}
                     onClick={handleCancelEdit}
                     disabled={isSubmitting}
-                    sx={{ minHeight: 40, borderRadius: BUTTON_RADIUS, fontWeight: 600 }}
+                    sx={{
+                      minHeight: 40,
+                      borderRadius: BUTTON_RADIUS,
+                      fontWeight: 600,
+                    }}
                   >
                     取消修改
                   </Button>
@@ -627,7 +684,11 @@ export const ExpensesPage = () => {
                     variant="outlined"
                     onClick={handleClear}
                     disabled={isSubmitting}
-                    sx={{ minHeight: 40, borderRadius: BUTTON_RADIUS, fontWeight: 600 }}
+                    sx={{
+                      minHeight: 40,
+                      borderRadius: BUTTON_RADIUS,
+                      fontWeight: 600,
+                    }}
                   >
                     清空表單
                   </Button>
@@ -664,7 +725,12 @@ export const ExpensesPage = () => {
             {isLoadingList && (
               <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
                 {[0, 1, 2].map((i) => (
-                  <Skeleton key={i} variant="rectangular" height={56} sx={{ borderRadius: 1 }} />
+                  <Skeleton
+                    key={i}
+                    variant="rectangular"
+                    height={56}
+                    sx={{ borderRadius: 1 }}
+                  />
                 ))}
               </Box>
             )}
@@ -727,7 +793,9 @@ export const ExpensesPage = () => {
                     </Typography>
                   </Box>
                 ) : (
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  <Box
+                    sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+                  >
                     {filteredExpenses.map((expense) => {
                       const catInfo = getCategoryInfo(expense.category);
                       return (
@@ -739,15 +807,18 @@ export const ExpensesPage = () => {
                             gap: 1.5,
                             p: 1.5,
                             borderRadius: 1,
-                            border: editingId === expense.id
-                              ? "2px solid #FFB830"
-                              : OUTLINE_BORDER_THIN,
-                            backgroundColor: editingId === expense.id
-                              ? "#FFF8E1"
-                              : "transparent",
+                            border:
+                              editingId === expense.id
+                                ? "2px solid #FFB830"
+                                : OUTLINE_BORDER_THIN,
+                            backgroundColor:
+                              editingId === expense.id
+                                ? "#FFF8E1"
+                                : "transparent",
                             position: "relative",
                             overflow: "hidden",
-                            transition: "background-color 0.2s, border-color 0.2s",
+                            transition:
+                              "background-color 0.2s, border-color 0.2s",
                             "&::before": {
                               content: '""',
                               position: "absolute",
@@ -764,11 +835,19 @@ export const ExpensesPage = () => {
                             {catInfo?.emoji ?? "💴"}
                           </Typography>
                           <Box sx={{ flex: 1, minWidth: 0 }}>
-                            <Typography variant="body2" sx={{ fontWeight: 600 }} noWrap>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontWeight: 600 }}
+                              noWrap
+                            >
                               {expense.product_name}
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">
-                              {getDateTitle(expense.purchase_date)} · {catInfo?.label ?? expense.category}
+                            <Typography
+                              variant="caption"
+                              color="text.secondary"
+                            >
+                              {getDateTitle(expense.purchase_date)} ·{" "}
+                              {catInfo?.label ?? expense.category}
                             </Typography>
                           </Box>
                           <Typography
@@ -781,7 +860,10 @@ export const ExpensesPage = () => {
                             size="small"
                             onClick={() => handleEditClick(expense)}
                             sx={{
-                              color: editingId === expense.id ? "#FFB830" : "text.secondary",
+                              color:
+                                editingId === expense.id
+                                  ? "#FFB830"
+                                  : "text.secondary",
                               "&:hover": { color: "warning.main" },
                             }}
                           >
@@ -813,13 +895,9 @@ export const ExpensesPage = () => {
         open={!!deletingExpense}
         onClose={() => !isDeleting && setDeletingExpense(null)}
       >
-        <DialogTitle sx={{ fontWeight: 700 }}>
-          確認刪除？
-        </DialogTitle>
+        <DialogTitle sx={{ fontWeight: 700 }}>確認刪除？</DialogTitle>
         <DialogContent>
-          <Typography variant="body2">
-            確定要刪除這筆記帳記錄嗎？
-          </Typography>
+          <Typography variant="body2">確定要刪除這筆記帳記錄嗎？</Typography>
           {deletingExpense && (
             <Box
               sx={{
@@ -836,12 +914,17 @@ export const ExpensesPage = () => {
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 {getDateTitle(deletingExpense.purchase_date)} ·{" "}
-                {getCategoryInfo(deletingExpense.category)?.label ?? deletingExpense.category} ·{" "}
-                {convertAndFormat(deletingExpense.price)}
+                {getCategoryInfo(deletingExpense.category)?.label ??
+                  deletingExpense.category}{" "}
+                · {convertAndFormat(deletingExpense.price)}
               </Typography>
             </Box>
           )}
-          <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1.5 }}>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ display: "block", mt: 1.5 }}
+          >
             此操作無法復原。
           </Typography>
         </DialogContent>
